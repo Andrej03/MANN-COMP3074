@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/et_budget_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Budget Item" />
+
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/categories" />
+
+    <Button
+        android:id="@+id/btn_add_budget_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add to Budget" />
+
+    <TextView
+        android:id="@+id/tv_budget_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Budget: $0.00"
+        android:paddingTop="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_budget_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
