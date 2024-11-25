@@ -7,7 +7,7 @@
     android:background="?attr/colorPrimary">
 
     <ImageView
-        android:id="@+id/iv_header_profile_picture"
+        android:id="@+id/headerProfileImage"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:src="@drawable/ic_profile"
@@ -15,7 +15,7 @@
         android:layout_gravity="center" />
 
     <TextView
-        android:id="@+id/tv_header_username"
+        android:id="@+id/headerUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

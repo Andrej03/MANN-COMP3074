@@ -7,8 +7,8 @@ public class TransactionData {
 
     private static final List<String> transactions = new ArrayList<>();
 
-    public static void addTransaction(String account, String description, String amount) {
-        String transaction = "Account: " + account + ", Description: " + description + ", Amount: " + amount;
+    public static void addTransaction(String accNum, String transDesc, String amountSet) {
+        String transaction = "Account: " + accNum + ", Description: " + transDesc + ", Amount: " + amountSet;
         transactions.add(transaction);
     }
 
@@ -16,4 +16,3 @@ public class TransactionData {
         return transactions;
     }
 }
-

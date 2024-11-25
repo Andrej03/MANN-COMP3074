@@ -10,39 +10,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetViewHolder> {
+public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BdgtViewHolder> {
 
-    private final List<String> budgetList;
+    private final List<String> bdgtList;
 
-    public BudgetAdapter(List<String> budgetList) {
-        this.budgetList = budgetList;
+    public BudgetAdapter(List<String> bdgtList) {
+        this.bdgtList = bdgtList;
     }
 
     @NonNull
     @Override
-    public BudgetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BdgtViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_budget, parent, false);
-        return new BudgetViewHolder(view);
+        return new BdgtViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BudgetViewHolder holder, int position) {
-        String budgetItem = budgetList.get(position);
-        holder.tvBudgetItem.setText(budgetItem);
+    public void onBindViewHolder(@NonNull BdgtViewHolder holder, int position) {
+        String bdgt = bdgtList.get(position);
+        holder.bdgtTxt.setText(bdgt);
     }
 
     @Override
     public int getItemCount() {
-        return budgetList.size();
+        return bdgtList.size();
     }
 
-    static class BudgetViewHolder extends RecyclerView.ViewHolder {
-        TextView tvBudgetItem;
+    static class BdgtViewHolder extends RecyclerView.ViewHolder {
+        TextView bdgtTxt;
 
-        public BudgetViewHolder(@NonNull View itemView) {
+        public BdgtViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvBudgetItem = itemView.findViewById(R.id.tv_budget);
+            bdgtTxt = itemView.findViewById(R.id.bdgtTxt);
         }
     }
 }

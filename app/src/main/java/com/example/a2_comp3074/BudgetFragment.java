@@ -20,50 +20,47 @@ import java.util.List;
 
 public class BudgetFragment extends Fragment {
 
-    private EditText etBudgetItem;
-    private Spinner spinnerCategory;
-    private Button btnAddBudgetItem;
-    private TextView tvBudgetTotal;
-    private RecyclerView rvBudgetList;
+    private EditText bdgtInp;
+    private Spinner itmCat;
+    private Button addBdgtBtn;
+    private TextView bdgtTotalTxt;
+    private RecyclerView bdgtListView;
 
-    private BudgetAdapter budgetAdapter;
-    private List<String> budgetList;
-    private double totalBudget;
+    private BudgetAdapter bdgtAdapter;
+    private List<String> bdgtList;
+    private double bdgtTot;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_budget, container, false);
 
-        etBudgetItem = view.findViewById(R.id.et_budget_item);
-        spinnerCategory = view.findViewById(R.id.spinner_category);
-        btnAddBudgetItem = view.findViewById(R.id.btn_add_budget_item);
-        tvBudgetTotal = view.findViewById(R.id.tv_budget_total);
-        rvBudgetList = view.findViewById(R.id.rv_budget_list);
+        bdgtInp = view.findViewById(R.id.bdgtInp);
+        itmCat = view.findViewById(R.id.itmCat);
+        addBdgtBtn = view.findViewById(R.id.addBdgtBtn);
+        bdgtTotalTxt = view.findViewById(R.id.bdgtTotTxt);
+        bdgtListView = view.findViewById(R.id.bdgtListView);
 
-        budgetList = new ArrayList<>();
-        budgetAdapter = new BudgetAdapter(budgetList);
-        rvBudgetList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvBudgetList.setAdapter(budgetAdapter);
+        bdgtList = new ArrayList<>();
+        bdgtAdapter = new BudgetAdapter(bdgtList);
+        bdgtListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        bdgtListView.setAdapter(bdgtAdapter);
 
-        btnAddBudgetItem.setOnClickListener(v -> addBudgetItem());
+        addBdgtBtn.setOnClickListener(v -> addBdgtItm());
 
         return view;
     }
 
-    private void addBudgetItem() {
-        String item = etBudgetItem.getText().toString();
-        String category = spinnerCategory.getSelectedItem().toString();
+    private void addBdgtItm() {
+        String itm = bdgtInp.getText().toString();
+        String cat = itmCat.getSelectedItem().toString();
 
-        if (!item.isEmpty()) {
-            budgetList.add(item + " (" + category + ")");
-            budgetAdapter.notifyDataSetChanged();
-
-            // For simplicity, assume every item is $100
-            totalBudget += 100;
-            tvBudgetTotal.setText("Total Budget: $" + totalBudget);
-
-            etBudgetItem.setText("");
+        if (!itm.isEmpty()) {
+            bdgtList.add(itm + " (" + cat + ")");
+            bdgtAdapter.notifyDataSetChanged();
+            bdgtTot += 100;
+            bdgtTotalTxt.setText("Total Budget: $" + bdgtTot);
+            bdgtInp.setText("");
         }
     }
 }

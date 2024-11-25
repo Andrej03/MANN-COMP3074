@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -6,34 +7,33 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/et_budget_item"
+        android:id="@+id/bdgtInp"
+        android:hint="Budget Item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Budget Item" />
+        android:layout_height="48dp"
+        android:inputType="text" />
 
     <Spinner
-        android:id="@+id/spinner_category"
+        android:id="@+id/itmCat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/categories" />
+        android:layout_height="48dp" />
 
     <Button
-        android:id="@+id/btn_add_budget_item"
+        android:id="@+id/addBdgtBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add to Budget" />
+        android:layout_height="48dp"
+        android:text="Add Budget" />
 
     <TextView
-        android:id="@+id/tv_budget_total"
+        android:id="@+id/bdgtTotTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total Budget: $0.00"
-        android:paddingTop="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:paddingTop="16dp"
+        android:text="Total Budget: $0" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_budget_list"
+        android:id="@+id/bdgtListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="16dp" />
 </LinearLayout>

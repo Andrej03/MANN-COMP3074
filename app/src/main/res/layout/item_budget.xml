@@ -4,16 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_budget"
-        android:layout_width="match_parent"
+        android:id="@+id/bdgtTxt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="#f5f5f5"
-        android:textSize="16sp"
-        android:layout_marginBottom="4dp" />
-
+        android:text="Budget Item"
+        android:textStyle="bold" />
 </LinearLayout>

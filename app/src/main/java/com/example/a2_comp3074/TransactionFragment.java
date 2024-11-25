@@ -7,64 +7,71 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.example.a2_comp3074.TransactionData;
+import androidx.lifecycle.ViewModelProvider;
 
 public class TransactionFragment extends Fragment {
 
-    private EditText etAccountNumber, etDescription, etAmount;
-    private Button btnSubmitTransaction;
-    private TextView tvTransactionStatus;
+    private EditText accNum;
+    private EditText transDesc;
+    private EditText amountSet;
+    private Button submitTransaction;
+    private TextView transactionStatus;
+    private SharedViewModel sharedViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_transaction, container, false);
 
-        // Initialize views
-        etAccountNumber = view.findViewById(R.id.et_account_number);
-        etDescription = view.findViewById(R.id.et_description);
-        etAmount = view.findViewById(R.id.et_amount);
-        btnSubmitTransaction = view.findViewById(R.id.btn_submit_transaction);
-        tvTransactionStatus = view.findViewById(R.id.tv_transaction_status);
+        accNum = view.findViewById(R.id.accNum);
+        transDesc = view.findViewById(R.id.transDesc);
+        amountSet = view.findViewById(R.id.amountSet);
+        submitTransaction = view.findViewById(R.id.submitTransaction);
+        transactionStatus = view.findViewById(R.id.transactionStatus);
 
-        // Handle button click
-        btnSubmitTransaction.setOnClickListener(v -> handleTransaction());
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        submitTransaction.setOnClickListener(v -> handleTransaction());
 
         return view;
     }
 
     private void handleTransaction() {
-        String accountNumber = etAccountNumber.getText().toString();
-        String description = etDescription.getText().toString();
-        String amount = etAmount.getText().toString();
+        String accNumText = accNum.getText().toString();
+        String transDescText = transDesc.getText().toString();
+        String amountSetText = amountSet.getText().toString();
 
-        if (accountNumber.isEmpty() || description.isEmpty() || amount.isEmpty()) {
-            tvTransactionStatus.setText("All fields are required!");
-            tvTransactionStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-            tvTransactionStatus.setVisibility(View.VISIBLE);
+        if (accNumText.isEmpty() || transDescText.isEmpty() || amountSetText.isEmpty()) {
+            transactionStatus.setText("All fields are required!");
+            transactionStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            transactionStatus.setVisibility(View.VISIBLE);
             return;
         }
 
-        // Display success message
-        String successMessage = "Transaction Successful!\n" +
-                "Account: " + accountNumber + "\n" +
-                "Description: " + description + "\n" +
-                "Amount: " + amount;
-        tvTransactionStatus.setText(successMessage);
-        tvTransactionStatus.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
-        tvTransactionStatus.setVisibility(View.VISIBLE);
+        double amount;
+        try {
+            amount = Double.parseDouble(amountSetText);
+        } catch (NumberFormatException e) {
+            transactionStatus.setText("Invalid amount!");
+            transactionStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            transactionStatus.setVisibility(View.VISIBLE);
+            return;
+        }
 
-        // Send data to Reports Screen (for simplicity, we'll use a shared list here)
-        TransactionData.addTransaction(accountNumber, description, amount);
+        Transaction transaction = new Transaction(accNumText, transDescText, amount);
 
-        // Clear input fields
-        etAccountNumber.setText("");
-        etDescription.setText("");
-        etAmount.setText("");
+        sharedViewModel.addTransaction(transaction);
+
+        String successMessage = "Transaction Successful!\nAccount: " + accNumText + "\nDescription: " + transDescText + "\nAmount: " + amount;
+        transactionStatus.setText(successMessage);
+        transactionStatus.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+        transactionStatus.setVisibility(View.VISIBLE);
+
+        accNum.setText("");
+        transDesc.setText("");
+        amountSet.setText("");
     }
 }
